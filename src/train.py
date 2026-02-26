@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+from sklearn.metrics import RocCurveDisplay
 import os
 import joblib
 import openml
@@ -58,6 +60,17 @@ def main():
     proba = clf.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, proba)
     print(f"ROC-AUC: {auc:.4f}")
+
+    # Save ROC Curve
+    import os
+    os.makedirs("reports/figures", exist_ok=True)
+
+    RocCurveDisplay.from_predictions(y_test, proba)
+    plt.title(f"ROC Curve (AUC = {auc:.4f})")
+    plt.savefig("reports/figures/roc_curve.png", dpi=160, bbox_inches="tight")
+    plt.close()
+
+    print("Saved ROC curve to reports/figures/roc_curve.png")
 
     preds = (proba >= 0.5).astype(int)
     print(classification_report(y_test, preds))

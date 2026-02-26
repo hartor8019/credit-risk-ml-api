@@ -18,3 +18,9 @@ uvicorn app.main:app --reload
 ```bash
 docker build -t credit-risk-ml-api .
 docker run -p 8000:8000 credit-risk-ml-api
+
+## Model Performance
+
+ROC-AUC: 0.8040
+
+![ROC Curve](reports/figures/roc_curve.png)

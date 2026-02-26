@@ -24,6 +24,16 @@ class PredictResponse(BaseModel):
 def health():
     return {"status": "ok"}
 
+@app.get("/metadata")
+def metadata():
+    return {
+        "model_name": "Credit Risk Scoring",
+        "model_type": "LogisticRegression + preprocessing pipeline",
+        "dataset": "OpenML credit-g (German Credit)",
+        "target_definition": "1 = bad (higher default risk), 0 = good",
+        "version": "1.0.0"
+    }
+
 def risk_bucket(p: float) -> str:
     # simple thresholds para demo
     if p < 0.33:
@@ -48,11 +58,3 @@ def predict(req: PredictRequest):
         "risk_level": risk_bucket(proba)
     }
 
-@app.get("/metadata")
-def metadata():
-    return {
-        "model_type": "Logistic Regression",
-        "target": "credit default (1 = bad, 0 = good)",
-        "version": "1.0",
-        "description": "Credit risk scoring model trained on German Credit dataset"
-    }

@@ -7,3 +7,4 @@ joblib
 openml
 pytest
 httpx
+matplotlib
