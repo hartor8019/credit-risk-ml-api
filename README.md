@@ -13,3 +13,8 @@ End-to-end ML project: training + evaluation + deployment as a FastAPI service.
 pip install -r requirements.txt
 python src/train.py
 uvicorn app.main:app --reload
+
+## Run with Docker
+```bash
+docker build -t credit-risk-ml-api .
+docker run -p 8000:8000 credit-risk-ml-api
